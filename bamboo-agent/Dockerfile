@@ -2,16 +2,16 @@
 #
 # VERSION               0.0.1
 
-FROM java
+FROM hwuethrich/java
 MAINTAINER H. Wüthrich "hw@5px.ch"
 
 # Environment
 ENV BAMBOO_HOME   /home/bamboo
-ENV BAMBOO_SERVER http://localhost:8085
+ENV BAMBOO_SERVER http://changeme:8085
 
 # Install Bamboo Agent
 ADD supervisor.conf /etc/supervisor/conf.d/bamboo-agent.conf
-ADD bamboo-agent /usr/bin/bamboo-agent
+ADD bamboo-agent.sh /usr/bin/bamboo-agent
 
 # Add capabilities
 RUN mkdir -p $BAMBOO_HOME/bin
