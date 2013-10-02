@@ -2,7 +2,7 @@
 #
 # VERSION               0.0.1
 
-FROM bamboo-agent
+FROM hwuethrich/bamboo-agent
 MAINTAINER H. Wüthrich "hw@5px.ch"
 
 # Essentials

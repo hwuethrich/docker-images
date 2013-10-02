@@ -2,7 +2,7 @@
 #
 # VERSION               0.0.1
 
-FROM java
+FROM hwuethrich/java
 MAINTAINER H. Wüthrich "hw@5px.ch"
 
 # Environment
