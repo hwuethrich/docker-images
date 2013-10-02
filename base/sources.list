@@ -1,0 +1,3 @@
+deb http://mirror.hetzner.de/ubuntu/packages precise main restricted universe multiverse
+deb http://mirror.hetzner.de/ubuntu/packages precise-updates main restricted universe multiverse
+deb http://mirror.hetzner.de/ubuntu/security precise-security main restricted universe multiverse

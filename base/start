@@ -1,0 +1,11 @@
+#!/usr/bin/env bash 
+
+# Add hostname to hostsfile
+echo "=> Adding $HOSTNAME to hosts file ..."
+echo "127.0.0.1    $HOSTNAME" >> /etc/hosts
+
+echo "=> Current environment:"
+env 
+
+echo "=> Starting supervisor ..."
+supervisord -c /etc/supervisor/supervisor.conf
