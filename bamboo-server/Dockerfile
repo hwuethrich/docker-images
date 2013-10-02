@@ -5,21 +5,17 @@
 FROM java
 MAINTAINER H. Wüthrich "hw@5px.ch"
 
-# Install Bamboo Server
-ADD http://www.atlassian.com/software/bamboo/downloads/binary/atlassian-bamboo-5.1.1.tar.gz /tmp/atlassian-bamboo-5.1.1.tar.gz
-RUN tar xzf /tmp/atlassian-bamboo-5.1.1.tar.gz -C /opt
-RUN ln -s /opt/atlassian-bamboo-5.1.1 /opt/atlassian-bamboo
-
-# Setup Bamboo Home
+# Environment
+ENV BAMBOO_VERSION 5.1.1
 ENV BAMBOO_HOME /home/bamboo
-RUN mkdir -p $BAMBOO_HOME
 
-# Port redirection
+# Add startup script and supervisor config
+ADD bamboo-server.sh /usr/local/bin/bamboo-server
+ADD supervisor.conf /etc/supervisor/conf.d/bamboo-server.conf
+
+# Expose web and agent ports
 EXPOSE 8085
 EXPOSE 54663
-
-# Add supervisor config
-ADD supervisor.conf /etc/supervisor/conf.d/bamboo-server.conf
 
 CMD ["start"]
 

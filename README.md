@@ -16,8 +16,8 @@ Derived from the `base` image. Installs Java from the webupd8team PPA.
 
 ## bamboo-server
 
-Derived from the `java` image. Runs [Atlassian Bamboo](https://www.atlassian.com/software/bamboo) (currently v5.1.1)
-using `supervisord`.
+Derived from the `java` image. Downloads and installs [Atlassian Bamboo](https://www.atlassian.com/software/bamboo) 
+and runs the server using `supervisord`.
 
 #### Usage
 
@@ -31,6 +31,13 @@ You may persist all Bamboo data outside of the container by mapping a volume to 
 docker run -p 8085:8085 -p 54663:54663 -v /data/bamboo-server:/home/bamboo -d bamboo-server
 ```
 
+By default it installs v5.1.1. To specify which version to install, set the environment 
+variable `BAMBOO_VERSION`:
+
+```
+docker run -e BAMBOO_VERSION=5.1.0 -d hwuethrich/bamboo-server
+```
+
 #### Directories
 
 * `/opt/atlassian-bamboo-5.1.1` - Bamboo installation directory
@@ -39,6 +46,7 @@ docker run -p 8085:8085 -p 54663:54663 -v /data/bamboo-server:/home/bamboo -d ba
 #### Environment
 
 * `BAMBOO_HOME` - Bamboo home directory. Default is `/home/bamboo`.
+* `BAMBOO_VERSION` - The version to install an run (default 5.1.1) 
 
 #### Ports
 
