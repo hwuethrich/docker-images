@@ -9,7 +9,7 @@ MAINTAINER H. Wüthrich "hw@5px.ch"
 ENV DEBIAN_FRONTEND noninteractive
 
 # Make sure the package repository is up to date
-ADD sources.list /etc/apt/sources.list
+RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 RUN apt-get update && apt-get -y install curl wget git-core vim htop supervisor
 
 # Configure supervisor
