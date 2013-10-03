@@ -2,8 +2,8 @@
 
 set -e # Exit on errors
 
-for image in base java bamboo-server bamboo-agent bamboo-agent-ruby
+for image in base java bamboo-server bamboo-agent bamboo-ruby
 do
-echo "=> Building $image ..."
-docker build -t hwuethrich/$image $image
+    echo "=> Building $image ..."
+    docker build -t hwuethrich/$image $image > /dev/null
 done

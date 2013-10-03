@@ -1,4 +1,4 @@
-# Images for [docker.io](http://docker.io) 
+# Images for [docker.io](http://docker.io)
 
 My collection of docker images. Also see my profile on [index.docker.io](https://index.docker.io/u/hwuethrich/).
 
@@ -22,9 +22,10 @@ Runs [Atlassian Bamboo](https://www.atlassian.com/software/bamboo) with `supervi
 
 Runs Bamboo Agent using `supervisor`
 
-#### [`bamboo-agent-ruby`](/bamboo-agent-ruby)
+#### [`bamboo-ruby`](/bamboo-ruby)
 
-Installs Ruby 2.0.0 p247 using `rbenv` and generates agent capabilities.
+Same as `bamboo-agent`, but with Ruby 2.0.0 p247 using `rbenv`. Also
+generates agent capabilities for common ruby commands.
 
 ## Contributions
 
