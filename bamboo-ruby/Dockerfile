@@ -16,14 +16,17 @@ ADD rbenv.sh /etc/profile.d/rbenv.sh
 ENV RBENV_ROOT /usr/local/rbenv
 ENV PATH /usr/local/rbenv/shims:/usr/local/rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-# Install ruby-build
-RUN mkdir /usr/local/rbenv/plugins && git clone https://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build
+# Install ruby-build & rbenv-aliases
+RUN mkdir -p /usr/local/rbenv/plugins && cd /usr/local/rbenv/plugins && git clone https://github.com/sstephenson/ruby-build.git && git clone git://github.com/tpope/rbenv-aliases.git
 
 # Install Ruby 2.0.0 and make it default
-RUN rbenv install 2.0.0-p247 && rbenv global 2.0.0-p247 && rbenv rehash
+RUN rbenv install 2.0.0-p247 && rbenv global 2.0.0-p247
+
+# Disable rdoc/ri
+RUN echo "gem: --no-document" > /.gemrc
 
 # Install Bundler
-RUN gem install bundler --no-ri --no-rdoc
+RUN gem install bundler
 
 # Generate bamboo-capabilities.properties
 ADD capabilities.sh /tmp/
