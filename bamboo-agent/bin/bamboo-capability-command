@@ -3,13 +3,16 @@
 set -e # Exit on errors
 
 if [ -z "$1" ]; then
-	echo "Usage: bamboo-capability-command <cmd> [<cmd>, ...]"
+	echo "Usage: bamboo-capability-command <cmd>[=<label>] [<cmd>=[<label>], ...]"
   exit 1
 fi
 
-for cmd in $*
+for arg in $*
 do
-  bamboo-capability "system.builder.command.$cmd" "`which $cmd`"
+  arg=(${arg//=/ })
+  cmd=${arg[0]}
+  label=${arg[1]:-$cmd}
+  echo bamboo-capability "system.builder.command.$label" "`which $cmd`"
 done
 
 exit 0

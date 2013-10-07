@@ -18,6 +18,6 @@ ADD bin /usr/local/bin
 RUN mkdir -p $BAMBOO_HOME/bin
 
 # Add Bash command
-RUN bamboo-capability-command bash git
+RUN bamboo-capability-command bash=Bash
 
 CMD ["/start/supervisord"]
