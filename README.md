@@ -24,8 +24,11 @@ Runs Bamboo Agent using `supervisor`
 
 #### [`bamboo-ruby`](/bamboo-ruby)
 
-Same as `bamboo-agent`, but with Ruby 2.0.0 p247 using `rbenv`. Also
-generates agent capabilities for common ruby commands.
+Same as `bamboo-agent` but with `rbenv`. Does **not** install any rubies!
+
+#### [`bamboo-ruby-extra`](/bamboo-ruby-extra)
+
+Rubies and common packages and services (phantomjs, postgresql, ...)
 
 ## Contributions
 
