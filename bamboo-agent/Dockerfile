@@ -6,6 +6,7 @@ FROM hwuethrich/java
 MAINTAINER H. Wüthrich "hw@5px.ch"
 
 # Environment
+ENV BAMBOO_USER   bamboo
 ENV BAMBOO_HOME   /home/bamboo
 ENV BAMBOO_SERVER http://changeme:8085
 
@@ -13,6 +14,9 @@ ENV BAMBOO_SERVER http://changeme:8085
 ADD supervisor.conf /etc/supervisor/conf.d/bamboo-agent.conf
 ADD bamboo-agent.sh /start/bamboo-agent
 ADD bin /usr/local/bin
+
+# Add bamboo user
+RUN adduser --system --home $BAMBOO_HOME --shell /bin/bash $BAMBOO_USER
 
 # Add Bash command
 RUN bamboo-capability-command bash git

@@ -9,10 +9,15 @@ apt-get clean
 # Install rbenv
 git clone https://github.com/sstephenson/rbenv.git $RBENV_ROOT
 
+# Enable rbenv for shells
+echo "RBENV_ROOT=$RBENV_ROOT"                 >> /etc/profile.d/rbenv.sh
+echo 'eval "$($RBENV_ROOT/bin/rbenv init -)"' >> /etc/profile.d/rbenv.sh
+chmod +x /etc/profile.d/rbenv.sh
+
 # Install ruby-build & rbenv-aliases
 mkdir -p $RBENV_ROOT/plugins
 git clone https://github.com/sstephenson/ruby-build.git $RBENV_ROOT/plugins/ruby-build
 git clone git://github.com/tpope/rbenv-aliases.git      $RBENV_ROOT/plugins/rbenv-aliases
- 
+
 # Disable rdoc/ri
-echo "gem: --no-document" > /.gemrc
+echo "gem: --no-document" > $BAMBOO_HOME/.gemrc

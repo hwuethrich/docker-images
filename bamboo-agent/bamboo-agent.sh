@@ -3,10 +3,9 @@
 set -e # Exit on errors
 
 echo "-> Starting Bamboo Agent ..."
+echo "   - BAMBOO_USER:   $BAMBOO_USER"
 echo "   - BAMBOO_HOME:   $BAMBOO_HOME"
 echo "   - BAMBOO_SERVER: $BAMBOO_SERVER"
-
-mkdir -p $BAMBOO_HOME
 
 BAMBOO_INSTALLER=$BAMBOO_HOME/bamboo-agent-installer.jar
 if [ -f $BAMBOO_INSTALLER ]; then
@@ -17,8 +16,11 @@ else
   wget --progress=dot:mega $BAMBOO_INSTALLER_URL -O $BAMBOO_INSTALLER
 fi
 
+# Fix permissions
+chown -R $BAMBOO_USER:nogroup $BAMBOO_HOME
+
 echo "-> Running Bamboo Installer ..."
-java -Dbamboo.home=$BAMBOO_HOME -jar $BAMBOO_INSTALLER $BAMBOO_SERVER/agentServer/ &
+su - $BAMBOO_USER -c "java -Dbamboo.home=$BAMBOO_HOME -jar $BAMBOO_INSTALLER $BAMBOO_SERVER/agentServer/" &
 
 # Kill Bamboo process on signals from supervisor
 trap 'kill `cat $BAMBOO_HOME/bin/bamboo-agent.pid`' SIGINT SIGTERM EXIT
