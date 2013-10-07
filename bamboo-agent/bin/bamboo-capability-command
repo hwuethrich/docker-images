@@ -12,7 +12,7 @@ do
   arg=(${arg//=/ })
   cmd=${arg[0]}
   label=${arg[1]:-$cmd}
-  echo bamboo-capability "system.builder.command.$label" "`which $cmd`"
+  bamboo-capability "system.builder.command.$label" "`which $cmd`"
 done
 
 exit 0

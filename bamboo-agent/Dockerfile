@@ -14,10 +14,7 @@ ADD supervisor.conf /etc/supervisor/conf.d/bamboo-agent.conf
 ADD bamboo-agent.sh /start/bamboo-agent
 ADD bin /usr/local/bin
 
-# Add capabilities
-RUN mkdir -p $BAMBOO_HOME/bin
-
 # Add Bash command
-RUN bamboo-capability-command bash=Bash
+RUN bamboo-capability-command bash git
 
 CMD ["/start/supervisord"]
