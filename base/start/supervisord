@@ -8,4 +8,4 @@ echo "=> Current environment:"
 env 
 
 echo "=> Starting supervisor ..."
-supervisord -c /etc/supervisor/supervisor.conf
+supervisord -c /etc/supervisor/supervisord.conf
