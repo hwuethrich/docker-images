@@ -17,5 +17,15 @@ else
   wget --progress=dot:mega $BAMBOO_INSTALLER_URL -O $BAMBOO_INSTALLER
 fi
 
+# Kill Bamboo process on signals from supervisor
+# trap shutdown SIGINT SIGTERM EXIT
+
 echo "-> Running Bamboo Installer ..."
-java -Dbamboo.home=$BAMBOO_HOME -jar $BAMBOO_INSTALLER $BAMBOO_SERVER/agentServer/
+java -Dbamboo.home=$BAMBOO_HOME -jar $BAMBOO_INSTALLER $BAMBOO_SERVER/agentServer/ &
+
+# Kill Bamboo process on signals from supervisor
+trap 'kill -INT `cat $BAMBOO_HOME/bin/bamboo-agent.pid`' SIGINT SIGTERM EXIT
+
+# Wait for Bamboo process to terminate
+wait $(jobs -p)
+~

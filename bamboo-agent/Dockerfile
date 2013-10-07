@@ -11,7 +11,7 @@ ENV BAMBOO_SERVER http://changeme:8085
 
 # Install Bamboo Agent
 ADD supervisor.conf /etc/supervisor/conf.d/bamboo-agent.conf
-ADD bamboo-agent.sh /usr/bin/bamboo-agent
+ADD bamboo-agent.sh /start/bamboo-agent
 
 # Add capabilities
 RUN mkdir -p $BAMBOO_HOME/bin
@@ -19,4 +19,4 @@ RUN mkdir -p $BAMBOO_HOME/bin
 # Add Bash command
 RUN echo "system.builder.command.Bash=`which bash`" >> $BAMBOO_HOME/bin/bamboo-capabilities.properties
 
-CMD ["start"]
+CMD ["/start/supervisord"]
