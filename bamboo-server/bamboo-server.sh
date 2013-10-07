@@ -22,5 +22,14 @@ else
   echo "-> Installation completed"
 fi
 
+# Uncomment to increase Tomcat's maximum heap allocation
+# export JAVA_OPTS=-Xmx512M $JAVA_OPTS
+
 echo "-> Running Bamboo Server ..."
-$BAMBOO_DIR/bin/catalina.sh run
+$BAMBOO_DIR/bin/catalina.sh run &
+
+# Kill Bamboo process on signals from supervisor
+trap 'kill $(jobs -p)' SIGINT SIGTERM EXIT
+
+# Wait for Bamboo process to terminate
+wait $(jobs -p)
