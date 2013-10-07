@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e # Exit on errors
+
+if [ -z "$1" ]; then
+	echo "Usage: bamboo-capability-command <cmd> [<cmd>, ...]"
+  exit 1
+fi
+
+for cmd in $*
+do
+  bamboo-capability "system.builder.command.$cmd" "`which $cmd`"
+done
+
+exit 0

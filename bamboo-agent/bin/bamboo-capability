@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+	echo "Usage: bamboo-capability <key> [<val>]"
+  exit 1
+fi
+
+BAMBOO_HOME=${BAMBOO_HOME:-$PWD}
+BAMBOO_CAPABILITIES=${BAMBOO_CAPABILITIES:-$BAMBOO_HOME/bin/bamboo-capabilities.properties}
+
+# Create capabilities file
+mkdir -p $(dirname $BAMBOO_CAPABILITIES)
+touch $BAMBOO_CAPABILITIES
+
+# Escape key & val
+key=${1// /\\ }
+val=${2//,/\\,}
+
+# Remove key from capability file
+grep -v "$key=" $BAMBOO_CAPABILITIES > $BAMBOO_CAPABILITIES.tmp
+mv $BAMBOO_CAPABILITIES.tmp $BAMBOO_CAPABILITIES
+
+if [ -z "$val" ]; then
+  echo "Removed capability from $BAMBOO_CAPABILITIES: $key"
+else
+  echo "$key=$val" >> $BAMBOO_CAPABILITIES
+  echo "Added capability to $BAMBOO_CAPABILITIES: $key=$val"
+fi
+
+exit 0
