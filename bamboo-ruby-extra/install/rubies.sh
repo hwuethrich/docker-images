@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install rubies
-for version in 1.9.3-p448 2.0.0-p247 # 2.1.0-preview1
+for version in 1.9.3-p448 2.0.0-p247 2.1.0-preview1
 do
   rbenv install $version
   RBENV_VERSION=$version gem install bundler --no-rdoc --no-ri
