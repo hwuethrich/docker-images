@@ -10,8 +10,9 @@ apt-get clean
 git clone https://github.com/sstephenson/rbenv.git $RBENV_ROOT
 
 # Enable rbenv for shells
-echo "RBENV_ROOT=$RBENV_ROOT"                 >> /etc/profile.d/rbenv.sh
-echo 'eval "$($RBENV_ROOT/bin/rbenv init -)"' >> /etc/profile.d/rbenv.sh
+echo "export RBENV_ROOT=$RBENV_ROOT"                       >> /etc/profile.d/rbenv.sh
+echo 'export PATH=$RBENV_ROOT/shims:$RBENV_ROOT/bin:$PATH' >> /etc/profile.d/rbenv.sh
+echo 'eval "$($RBENV_ROOT/bin/rbenv init -)"'              >> /etc/profile.d/rbenv.sh
 chmod +x /etc/profile.d/rbenv.sh
 
 # Install ruby-build & rbenv-aliases
