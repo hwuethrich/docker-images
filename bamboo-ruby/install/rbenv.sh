@@ -21,4 +21,6 @@ git clone https://github.com/sstephenson/ruby-build.git $RBENV_ROOT/plugins/ruby
 git clone git://github.com/tpope/rbenv-aliases.git      $RBENV_ROOT/plugins/rbenv-aliases
 
 # Disable rdoc/ri
-echo "gem: --no-document" > $BAMBOO_HOME/.gemrc
+echo "gem: --no-ri --no-rdoc"     >> $BAMBOO_HOME/.gemrc
+echo "install: --no-ri --no-rdoc" >> $BAMBOO_HOME/.gemrc
+echo "update: --no-ri --no-rdoc"  >> $BAMBOO_HOME/.gemrc
