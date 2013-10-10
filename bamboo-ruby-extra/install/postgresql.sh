@@ -4,10 +4,18 @@
 # PostgreSQL 9.3
 #
 
+PG_VERSION=9.3
+
 # Install from apt.postgresql.org
 echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list
 wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add -
-apt-get update && apt-get -y install postgresql-9.3 postgresql-server-dev-9.3
+apt-get update && apt-get -y install postgresql-$PG_VERSION postgresql-server-dev-$PG_VERSION
+
+# Recreate cluster with UTF-8 encoding
+/etc/init.d/postgresql stop
+pg_dropcluster --stop $PG_VERSION main
+pg_createcluster --start -e UTF-8 $PG_VERSION main
+/etc/init.d/postgresql start
 
 # Create user 'bamboo' with random password
 PASS=`date +%s | sha256sum | base64 | head -c 32 ; echo`
