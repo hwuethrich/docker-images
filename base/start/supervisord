@@ -3,5 +3,16 @@
 echo "=> Current environment:"
 env 
 
+# Set timezone based on TZ env
+if [ ! -z "$TZ" ]; then
+  zoneinfo=/usr/share/zoneinfo/$TZ
+  if [ -f $zoneinfo ]; then
+    ln -s $zonefile /etc/localtime
+    echo "=> Timezone set to $TZ"
+  else
+    echo "!! Invalid timezone: $TZ"
+  fi
+fi
+
 echo "=> Starting supervisor ..."
 supervisord -c /etc/supervisor/supervisord.conf
