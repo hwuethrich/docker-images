@@ -5,10 +5,6 @@
 FROM hwuethrich/bamboo-agent
 MAINTAINER H. Wüthrich "hw@5px.ch"
 
-# Set rbenv environment
-ENV RBENV_ROOT /usr/local/rbenv
-ENV PATH /usr/local/rbenv/shims:/usr/local/rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-
 ADD install /tmp/install
 RUN /tmp/install/rbenv.sh && rm -rf /tmp/install
 
