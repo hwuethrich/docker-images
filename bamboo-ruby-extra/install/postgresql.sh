@@ -28,8 +28,21 @@ echo "CREATE DATABASE $BAMBOO_USER OWNER $BAMBOO_USER" | su postgres -c psql
 # See http://www.postgresql.org/docs/9.3/interactive/libpq-pgpass.html
 echo "localhost:5432:*:$BAMBOO_USER:$PASS" > $BAMBOO_HOME/.pgpass
 chmod 0600 $BAMBOO_HOME/.pgpass
-chown $BAMBOO_USER:nogroup $BAMBOO_HOME/.pgpass
+chown $BAMBOO_USER:$BAMBOO_USER $BAMBOO_HOME/.pgpass
 
 # Clean stop
 /etc/init.d/postgresql stop
 
+# Function to override settings in postgresql.conf
+function postgresql_conf () {
+  sed -i "s/^[#\s]*$1.*$/$1 = $2/" /etc/postgresql/$PG_VERSION/main/postgresql.conf
+}
+
+# We don't care about concistency if case of power failure
+postgresql_conf fsync off
+postgresql_conf full_page_writes off
+
+# Adjust max. connections and memory
+postgresql_conf max_connections 20
+postgresql_conf shared_buffers 128MB
+postgresql_conf work_mem 32MB
