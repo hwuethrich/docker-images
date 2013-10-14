@@ -3,7 +3,7 @@
 PG_VERSION=9.3
 
 # Add Bamboo capabilities
-bamboo-capabiliy "PostgreSQL" "`pg_config --version`"
+bamboo-capability "PostgreSQL" "`pg_config --version`"
 bamboo-capability-command psql
 
 echo "=> Starting PostgreSQL $PG_VERSION ..."
