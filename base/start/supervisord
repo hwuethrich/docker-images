@@ -5,13 +5,8 @@ env
 
 # Set timezone based on TZ env
 if [ ! -z "$TZ" ]; then
-  zoneinfo=/usr/share/zoneinfo/$TZ
-  if [ -f $zoneinfo ]; then
-    ln -s $zonefile /etc/localtime
-    echo "=> Timezone set to $TZ"
-  else
-    echo "!! Invalid timezone: $TZ"
-  fi
+  echo $TZ > /etc/timezone
+  dpkg-reconfigure tzdata
 fi
 
 echo "=> Starting supervisor ..."
