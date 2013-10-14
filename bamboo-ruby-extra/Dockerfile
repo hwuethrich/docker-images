@@ -7,7 +7,7 @@ MAINTAINER H. Wüthrich "hw@5px.ch"
 
 # Add and run setup scripts
 ADD install /tmp/install/
-RUN /tmp/install/all.sh
+RUN eatmydata -- /tmp/install/all.sh
 
 # Add startup scripts
 ADD start /start

@@ -16,7 +16,7 @@ RUN echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache
 
 # Make sure the package repository is up to date
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe restricted multiverse" > /etc/apt/sources.list
-RUN apt-get update && apt-get upgrade && apt-get -y install curl wget git-core vim htop supervisor net-tools inetutils-ping eatmydata # 10/14/2013
+RUN apt-get update && apt-get -y install eatmydata && eatmydata -- bash -c 'apt-get upgrade && apt-get -y install curl wget git-core vim htop supervisor net-tools inetutils-ping' # 10/14/2013
 
 # Configure supervisor
 ADD supervisord.conf /etc/supervisor/supervisord.conf

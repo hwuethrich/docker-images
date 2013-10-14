@@ -7,7 +7,7 @@ bamboo-capability "PostgreSQL" "`pg_config --version`"
 bamboo-capability-command psql
 
 echo "=> Starting PostgreSQL $PG_VERSION ..."
-su postgres -c "/usr/lib/postgresql/$PG_VERSION/bin/postgres -D /var/lib/postgresql/$PG_VERSION/main -c config_file=/etc/postgresql/$PG_VERSION/main/postgresql.conf" &
+su postgres -c "eatmydata -- /usr/lib/postgresql/$PG_VERSION/bin/postgres -D /var/lib/postgresql/$PG_VERSION/main -c config_file=/etc/postgresql/$PG_VERSION/main/postgresql.conf" &
 
 # Kill pg process on signals from supervisor
 trap 'kill $(jobs -p)' SIGINT SIGTERM EXIT

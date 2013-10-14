@@ -3,9 +3,9 @@
 # Install rubies
 for version in 1.9.3-p448 2.0.0-p247 2.1.0-preview1
 do
-  rbenv install $version
+  CONFIGURE_OPTS="--disable-install-rdoc" rbenv install $version
   RBENV_VERSION=$version gem update --system
-  RBENV_VERSION=$version gem install bundler --pre --no-rdoc --no-ri
+  RBENV_VERSION=$version gem install bundler --pre
 done
 
 # Make latest 2.0.0 default
