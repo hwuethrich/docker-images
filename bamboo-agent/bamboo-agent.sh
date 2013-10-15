@@ -17,7 +17,7 @@ else
 fi
 
 # Fix permissions
-chown -R $BAMBOO_USER:$BAMBOO_USER $BAMBOO_HOME
+chown -R $BAMBOO_USER:$BAMBOO_USER $BAMBOO_INSTALLER
 
 echo "-> Running Bamboo Installer ..."
 su - $BAMBOO_USER -c "eatmydata -- java -Dbamboo.home=$BAMBOO_HOME -jar $BAMBOO_INSTALLER $BAMBOO_SERVER/agentServer/" &
