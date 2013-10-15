@@ -20,7 +20,7 @@ fi
 chown -R $BAMBOO_USER:$BAMBOO_USER $BAMBOO_INSTALLER
 
 echo "-> Running Bamboo Installer ..."
-su - $BAMBOO_USER -c "eatmydata -- java -Dbamboo.home=$BAMBOO_HOME -jar $BAMBOO_INSTALLER $BAMBOO_SERVER/agentServer/" &
+su - $BAMBOO_USER -c "java -Dbamboo.home=$BAMBOO_HOME -jar $BAMBOO_INSTALLER $BAMBOO_SERVER/agentServer/" &
 
 # Kill Bamboo process on signals from supervisor
 trap 'kill `cat $BAMBOO_HOME/bin/bamboo-agent.pid`' SIGINT SIGTERM EXIT
