@@ -27,4 +27,3 @@ trap 'kill `cat $BAMBOO_HOME/bin/bamboo-agent.pid`' SIGINT SIGTERM EXIT
 
 # Wait for Bamboo process to terminate
 wait $(jobs -p)
-~
