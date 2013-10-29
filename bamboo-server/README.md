@@ -54,7 +54,7 @@ By default, the container runs Bamboo with `supervisord` in the background. If y
 and see the log output, run:
 
 ```
-docker run hwuethrich/bamboo-server bamboo-server
+docker run hwuethrich/bamboo-server /start/bamboo-server
 ```
 
 ## Directories
