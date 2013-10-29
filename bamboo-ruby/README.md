@@ -4,7 +4,7 @@ Bamboo agent with [rbenv](https://github.com/sstephenson/rbenv) and requirements
 
 Also installs the following rbenv plugins:
 
-* [ruby-build](https://github.com/sstephenson/ruby-build)  
+* [ruby-build](https://github.com/sstephenson/ruby-build)
 * [rbenv-aliases](https://github.com/tpope/rbenv-aliases)
 
 This image is intended to be used as a base for your own image and might not be very useful on its own. If you are looking for an image with preinstalled rubies, see [`hwuethrich/bamboo-ruby-extra`](../bamboo-ruby-extra)
