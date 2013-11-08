@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+# Helper script to set timezone based on TZ env
+
+if [ ! -z "$TZ" ] && ! grep -q "$TZ" /etc/timezone; then
+  echo "=> Setting timezone to $TZ ..."
+  echo "$TZ" > /etc/timezone
+  dpkg-reconfigure tzdata
+fi

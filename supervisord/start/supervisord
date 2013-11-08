@@ -1,0 +1,14 @@
+#!/usr/bin/env bash 
+
+set -e
+
+# Print current environment
+echo "=> Current environment:"
+env
+
+# Set timezone for TZ
+source /init/timezone
+
+# Start supervisor and pass any arguments
+echo "=> Starting supervisor ..."
+supervisord -c /etc/supervisor/supervisord.conf $@
