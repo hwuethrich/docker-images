@@ -14,7 +14,7 @@ export LC_ALL=en_US.UTF-8
 # Install from apt.postgresql.org
 echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list
 wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add -
-apt-get update && eatmydata apt-get -y install postgresql-$PG_VERSION postgresql-contrib-$PG_VERSION postgresql-client-$PG_VERSION postgresql-server-dev-$PG_VERSION libpq5 libpq-dev
+apt-get update && eatmydata apt-get -yq install postgresql-$PG_VERSION postgresql-contrib-$PG_VERSION postgresql-client-$PG_VERSION postgresql-server-dev-$PG_VERSION libpq5 libpq-dev
 
 # Recreate cluster with UTF-8 encoding
 pg_dropcluster --stop $PG_VERSION main

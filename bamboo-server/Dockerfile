@@ -14,9 +14,12 @@ ADD bamboo-server.sh /start/bamboo-server
 ADD supervisor.conf /etc/supervisor/conf.d/bamboo-server.conf
 
 # Install Oracle Java 7
-RUN eatmydata bash -c 'apt-get install -y python-software-properties && add-apt-repository ppa:webupd8team/java -y && apt-get update'
+RUN eatmydata -- apt-get install -yq python-software-properties && add-apt-repository ppa:webupd8team/java -y && apt-get update
 RUN echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-RUN eatmydata -- apt-get install -y oracle-java7-installer
+RUN eatmydata -- apt-get install -yq oracle-java7-installer
+
+# VCS tools
+RUN eatmydata -- apt-get install -yq git subversion
 
 # Expose web and agent ports
 EXPOSE 8085
