@@ -14,4 +14,4 @@ ADD supervisord.conf /etc/supervisor/supervisord.conf
 ADD start /start
 
 # Run supervisord
-ENTRYPOINT ["/start/supervisord"]
+CMD ["/start/supervisord"]

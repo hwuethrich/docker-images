@@ -16,12 +16,9 @@ RUN echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache
 
 # Make sure the package repository is up to date
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe restricted multiverse" > /etc/apt/sources.list
-RUN apt-get update && apt-get -qy install eatmydata # 11/08/2013
+RUN apt-get update && apt-get -qy install eatmydata language-pack-en # 11/09/2013
 
-# Fix locales
-ENV LANGUAGE en_US.UTF-8
-ENV LANG     en_US.UTF-8
-ENV LC_ALL   en_US.UTF-8
+# Fix locale
 RUN locale-gen en_US.UTF-8 && dpkg-reconfigure locales
 
 # Add init scripts
