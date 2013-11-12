@@ -32,7 +32,7 @@ If you don't have an instance of Bamboo server running already, you might want t
 
 Ultimately, the goal is to provide a technology stack similar to [Travis CI](http://about.travis-ci.org/docs/user/ci-environment/) or [Semaphore](http://docs.semaphoreapp.com/supported-stack), but we currently use this image for testing *Ruby on Rails* applications only.
 
-** If there is something missing, PLEASE feel free to open an issue or pull request! Contributions are more than welcome! :)**
+**If there is something missing, PLEASE feel free to open an issue or pull request! Contributions are more than welcome! :)**
 
 ### Ruby
 
