@@ -8,7 +8,6 @@ MAINTAINER H. Wüthrich "hw@5px.ch"
 # Environment
 ENV BAMBOO_USER   bamboo
 ENV BAMBOO_HOME   /home/$BAMBOO_USER
-ENV BAMBOO_SERVER http://changeme:8085
 
 # Install Bamboo Agent
 ADD start      /start
