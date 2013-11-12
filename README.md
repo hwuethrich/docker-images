@@ -20,7 +20,7 @@ Base image with [supervisord](http://supervisord.org) for managing multiple proc
 
 #### [`hwuethrich/bamboo-server`](/bamboo-server)
 
-Deploy and maintain your Bamboo server with Docker. Works with 
+Deploy and maintain your Bamboo server with Docker. Works with 5.1 and later.
 
 #### [`hwuethrich/bamboo-agent`](/bamboo-agent)
 
