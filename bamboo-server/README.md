@@ -1,7 +1,6 @@
-# Image `hwuethrich/bamboo-server`
+# Bamboo Server
 
-Downloads and installs [Atlassian Bamboo](https://www.atlassian.com/software/bamboo) 
-and runs the server using `supervisord`. Based on image [`hwuethrich/java`](../java). 
+Docker image to install [Atlassian Bamboo](https://www.atlassian.com/software/bamboo) and run the server using [supervisord](http://supervisord.org/).
 
 ## Usage
 
@@ -17,22 +16,21 @@ docker run -d hwuethrich/bamboo-server
 By default, the ports `8085` (admin interface) and `54663` (agent server) are mapped to random ports on the docker host. To customize, run:
 
 ```
-docker run -v -p 8085:8085 -p 54663:54663 hwuethrich/bamboo-server
+docker run -p 8085:8085 -p 54663:54663 hwuethrich/bamboo-server
 ```
 
-If you want to use Bamboo remote agents, make sure to set the public port (and hostname)
-in the Bamboo settings (or directly in `/home/bamboo/bamboo.cfg.xml`).
+If you want to use Bamboo remote agents, make sure to set the public port (and hostname) in the Bamboo settings (or directly in `/home/bamboo/bamboo.cfg.xml`).
 
 More info about port redirection can be found in the official Docker [documentation](http://docs.docker.io/en/latest/use/port_redirection/).
 
 ### Persist `BAMBOO_HOME` on the docker host
 
 By default the Bamboo config and database is stored in the container in `/home/bamboo`. You may map a directory on the
-host to this directory to store the Bamboo config and database outside of the container. 
+host to this directory to store the Bamboo config and database outside of the container.
 
 This is useful if you want to start containers using different versions of the image but
 with the same Bamboo database and license or if you want to backup this directory on the
-host. It also allows to upgrade your Bamboo server without losing your data:
+host. It also allows you to upgrade your Bamboo server without losing your data:
 
 ```
 docker run -v /data/bamboo-server:/home/bamboo -d hwuethrich/bamboo-server
@@ -48,7 +46,7 @@ docker run -e BAMBOO_VERSION=5.1.0 -d hwuethrich/bamboo-server
 
 Version 5.1.0 and later should work.
 
-### Running Bamboo without `supervisord`
+### Debugging
 
 By default, the container runs Bamboo with `supervisord` in the background. If you want to start Bamboo in the foreground
 and see the log output, run:
@@ -65,7 +63,7 @@ docker run hwuethrich/bamboo-server /start/bamboo-server
 ## Variables
 
 * `BAMBOO_HOME` - Bamboo home directory (default `/home/bamboo`)
-* `BAMBOO_VERSION` - The version to install an run (default `5.1.1`) 
+* `BAMBOO_VERSION` - The version to install an run (default `5.1.1`)
 
 ## Exposed ports
 

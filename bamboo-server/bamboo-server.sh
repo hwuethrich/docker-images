@@ -25,7 +25,7 @@ fi
 # Uncomment to increase Tomcat's maximum heap allocation
 # export JAVA_OPTS=-Xmx512M $JAVA_OPTS
 
-echo "-> Running Bamboo Server ..."
+echo "-> Running Bamboo server ..."
 $BAMBOO_DIR/bin/catalina.sh run &
 
 # Kill Bamboo process on signals from supervisor

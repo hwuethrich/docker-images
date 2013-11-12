@@ -2,7 +2,7 @@
 #
 # VERSION               0.0.1
 
-FROM hwuethrich/java
+FROM hwuethrich/supervisord
 MAINTAINER H. Wüthrich "hw@5px.ch"
 
 # Environment
@@ -11,14 +11,13 @@ ENV BAMBOO_HOME   /home/$BAMBOO_USER
 ENV BAMBOO_SERVER http://changeme:8085
 
 # Install Bamboo Agent
-ADD supervisor.conf /etc/supervisor/conf.d/bamboo-agent.conf
-ADD bamboo-agent.sh /start/bamboo-agent
-ADD bin /usr/local/bin
+ADD start      /start
+ADD supervisor /etc/supervisor/conf.d
+ADD bin        /usr/local/bin
 
-# Add bamboo user
-RUN useradd --create-home --shell /bin/bash --comment "Bamboo User" $BAMBOO_USER
+# Add and run install scripts
+ADD install /tmp/install
+RUN /tmp/install/all.sh && rm -rf /tmp/install
 
-# Add Bash command
-RUN su - bamboo -c 'bamboo-capability-command bash git'
-
+# Run supervisord
 CMD ["/start/supervisord"]

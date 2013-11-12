@@ -2,7 +2,7 @@
 
 set -e # Exit on errors
 
-for image in base java bamboo-server bamboo-agent bamboo-ruby bamboo-ruby-extra
+for image in base supervisord bamboo-server bamboo-agent
 do
     echo "=> Pushing $image ..."
     docker push hwuethrich/$image

@@ -6,22 +6,22 @@
 
 PG_VERSION=9.3
 
+# Set locale for new cluster
+export LANGUAGE=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # Install from apt.postgresql.org
 echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list
 wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add -
-apt-get update && apt-get -y install postgresql-$PG_VERSION postgresql-server-dev-$PG_VERSION
+apt-get update && eatmydata apt-get -y install postgresql-$PG_VERSION postgresql-contrib-$PG_VERSION postgresql-client-$PG_VERSION postgresql-server-dev-$PG_VERSION libpq5 libpq-dev
 
 # Recreate cluster with UTF-8 encoding
-/etc/init.d/postgresql stop
 pg_dropcluster --stop $PG_VERSION main
 pg_createcluster --start -e UTF-8 $PG_VERSION main
-/etc/init.d/postgresql start
 
-# Create user 'bamboo' with random password
-PASS=`date +%s | sha256sum | base64 | head -c 32 ; echo`
-echo "CREATE USER $BAMBOO_USER WITH CREATEDB CREATEUSER PASSWORD '$PASS';" | su postgres -c psql
-
-# Create default database
+# Create user 'bamboo' with password 'bamboo'
+echo "CREATE USER $BAMBOO_USER WITH CREATEDB CREATEUSER PASSWORD '$BAMBOO_USER';" | su postgres -c psql
 echo "CREATE DATABASE $BAMBOO_USER OWNER $BAMBOO_USER" | su postgres -c psql
 
 # Don't ask for password
