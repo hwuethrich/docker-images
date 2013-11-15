@@ -41,10 +41,21 @@ docker run -v /data/bamboo-server:/home/bamboo -d hwuethrich/bamboo-server
 By default, the container downloads and installs Bamboo v5.1.1 on the first boot. To specify which version to install, set the environment variable `BAMBOO_VERSION`:
 
 ```
-docker run -e BAMBOO_VERSION=5.1.0 -d hwuethrich/bamboo-server
+docker run -e BAMBOO_VERSION=5.2 -d hwuethrich/bamboo-server
 ```
 
 Version 5.1.0 and later should work.
+
+### Combined options
+
+The following example shows the options I use for our CI environment:
+
+```
+docker run -name bamboo-server \
+  -e TZ=Europe/Zurich -e JAVA_OPTS=-Xmx1024m -e BAMBOO_VERSION=5.2 \
+  -v /opt/bamboo-server:/home/bamboo -p 8085:8085 -p 54663:54663 \
+  -d hwuethrich/bamboo-server
+```
 
 ### Debugging
 
@@ -52,7 +63,7 @@ By default, the container runs Bamboo with `supervisord` in the background. If y
 and see the log output, run:
 
 ```
-docker run hwuethrich/bamboo-server /start/bamboo-server
+docker run -t -i hwuethrich/bamboo-server /start/bamboo-server
 ```
 
 ## Directories
