@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install rubies
-for version in 1.9.3-p448 2.0.0-p247 2.1.0-preview1
+for version in 1.9.3-p448 2.0.0-p353 2.1.0
 do
   CONFIGURE_OPTS="--disable-install-rdoc" MAKE_OPTS="-j8" eatmydata rbenv install $version
   RBENV_VERSION=$version gem update --system
