@@ -38,7 +38,7 @@ docker run -v /data/bamboo-server:/home/bamboo -d hwuethrich/bamboo-server
 
 ### Running a different Bamboo version
 
-By default, the container downloads and installs Bamboo v5.1.1 on the first boot. To specify which version to install, set the environment variable `BAMBOO_VERSION`:
+By default, the container downloads and installs Bamboo v5.4 on the first boot. To specify which version to install, set the environment variable `BAMBOO_VERSION`:
 
 ```
 docker run -e BAMBOO_VERSION=5.2 -d hwuethrich/bamboo-server
