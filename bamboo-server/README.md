@@ -1,6 +1,6 @@
 # Bamboo Server
 
-Docker image to install [Atlassian Bamboo](https://www.atlassian.com/software/bamboo) and run the server using [supervisord](http://supervisord.org/).
+Docker image to install [Atlassian Bamboo](https://www.atlassian.com/software/bamboo) based on [phusion/baseimage-docker](/phusion/baseimage-docker).
 
 ## Usage
 
@@ -21,7 +21,7 @@ docker run -p 8085:8085 -p 54663:54663 hwuethrich/bamboo-server
 
 If you want to use Bamboo remote agents, make sure to set the public port (and hostname) in the Bamboo settings (or directly in `/home/bamboo/bamboo.cfg.xml`).
 
-More info about port redirection can be found in the official Docker [documentation](http://docs.docker.io/en/latest/use/port_redirection/).
+More info about port redirection can be found in the official Docker [documentation](https://docs.docker.com/reference/run/#expose-incoming-ports).
 
 ### Persist `BAMBOO_HOME` on the docker host
 
