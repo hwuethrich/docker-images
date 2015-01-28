@@ -16,8 +16,8 @@ ENV BAMBOO_HOME /home/bamboo
 EXPOSE 8085
 EXPOSE 54663
 
-# Add startup script and supervisor config
-ADD bamboo-server.sh /etc/service/bamboo-service/run
+# Add runit service
+ADD bamboo-server.sh /etc/service/bamboo-server/run
 
 # Make sure we get latet packages
 RUN apt-get update && apt-get upgrade -y # 28.01.2015
