@@ -51,7 +51,7 @@ Version 5.1.0 and later should work.
 The following example shows the options I use for our CI environment:
 
 ```
-docker run -name bamboo-server \
+docker run --name=bamboo-server \
   -e TZ=Europe/Zurich -e JAVA_OPTS=-Xmx1024m -e BAMBOO_VERSION=5.2 \
   -v /opt/bamboo-server:/home/bamboo -p 8085:8085 -p 54663:54663 \
   -d hwuethrich/bamboo-server
