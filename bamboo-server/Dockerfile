@@ -9,7 +9,7 @@ MAINTAINER H. Wüthrich "hw@5px.ch"
 CMD ["/sbin/my_init"]
 
 # Environment
-ENV BAMBOO_VERSION 5.7.2
+ENV BAMBOO_VERSION 5.10.1.1
 ENV BAMBOO_HOME /home/bamboo
 
 # Expose web and agent ports
@@ -24,8 +24,8 @@ RUN apt-get update && apt-get upgrade -y # 28.01.2015
 
 # Install Java OpenJDK 7 and VCS tools
 RUN apt-get install -yq python-software-properties && add-apt-repository ppa:webupd8team/java -y && apt-get update
-RUN echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-RUN apt-get install -yq oracle-java7-installer git subversion
+RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+RUN apt-get install -yq oracle-java8-installer git subversion
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
