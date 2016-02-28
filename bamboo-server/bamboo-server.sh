@@ -20,7 +20,7 @@ else
   tar xzf /tmp/atlassian-bamboo.tar.gz -C /opt
   rm -f /tmp/atlassian-bamboo.tar.gz
   
-  echo "Add MySQL"
+  echo "Add MySQL Connector"
   MYSQL_CONNECTOR_VERSION="5.1.38"
   wget http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-$MYSQL_CONNECTOR_VERSION.tar.gz -O /tmp/mysql-connector.tar.gz
   tar xzf /tmp/mysql-connector.tar.gz -C /tmp
