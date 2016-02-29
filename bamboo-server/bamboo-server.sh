@@ -19,6 +19,20 @@ else
   echo "-> Extracting to $BAMBOO_DIR ..."
   tar xzf /tmp/atlassian-bamboo.tar.gz -C /opt
   rm -f /tmp/atlassian-bamboo.tar.gz
+  
+  
+  echo "Add MySQL Connector"
+  
+  if [ -z $MYSQL_CONNECTOR_VERSION ]; then
+    echo "MYSQL_CONNECTOR_VERSION not set. Setting to 5.1.38"
+    MYSQL_CONNECTOR_VERSION=5.1.38
+  fi
+  
+  wget http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-$MYSQL_CONNECTOR_VERSION.tar.gz -O /tmp/mysql-connector.tar.gz
+  tar xzf /tmp/mysql-connector.tar.gz -C /tmp
+  mv /tmp/mysql-connector-java-$MYSQL_CONNECTOR_VERSION/mysql-connector-java-$MYSQL_CONNECTOR_VERSION-bin.jar $BAMBOO_DIR/lib/
+  rm -Rf /tmp/*
+
   echo "-> Installation completed"
 fi
 
