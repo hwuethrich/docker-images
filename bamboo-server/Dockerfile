@@ -11,6 +11,7 @@ CMD ["/sbin/my_init"]
 # Environment
 ENV BAMBOO_VERSION 5.7.2
 ENV BAMBOO_HOME /home/bamboo
+ENV BAMBOO_SCHEME http 
 
 # Expose web and agent ports
 EXPOSE 8085
@@ -21,6 +22,9 @@ ADD bamboo-server.sh /etc/service/bamboo-server/run
 
 # Make sure we get latet packages
 RUN apt-get update && apt-get upgrade -y # 28.01.2015
+
+# Install xmlstarlet
+RUN apt-get install -yq xmlstarlet
 
 # Install Java OpenJDK 7 and VCS tools
 RUN apt-get install -yq python-software-properties && add-apt-repository ppa:webupd8team/java -y && apt-get update

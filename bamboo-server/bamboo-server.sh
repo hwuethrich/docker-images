@@ -5,6 +5,7 @@ set -e # Exit on errors
 echo "-> Starting Bamboo Agent ..."
 echo "   - BAMBOO_VERSION: $BAMBOO_VERSION"
 echo "   - BAMBOO_HOME:    $BAMBOO_HOME"
+echo "   - BAMBOO_SCHEME:  $BAMBOO_SCHEME"
 
 mkdir -p $BAMBOO_HOME
 
@@ -19,6 +20,22 @@ else
   echo "-> Extracting to $BAMBOO_DIR ..."
   tar xzf /tmp/atlassian-bamboo.tar.gz -C /opt
   rm -f /tmp/atlassian-bamboo.tar.gz
+  echo "-> Setting the HTTP/S settings in the server.xml"
+  SERVER_XML=$BAMBOO_DIR/conf/server.xml
+  xmlstarlet ed --pf --delete "//Connector[@port=8085]/@secure" $SERVER_XML > $SERVER_XML.tmp
+  xmlstarlet ed --pf --delete "//Connector[@port=8085]/@scheme" $SERVER_XML.tmp > $SERVER_XML
+  xmlstarlet ed --pf --delete "//Connector[@port=8085]/@proxyPort" $SERVER_XML > $SERVER_XML.tmp
+  xmlstarlet ed --pf --delete "//Connector[@port=8085]/@redirectPort" $SERVER_XML.tmp > $SERVER_XML
+  if [ $BAMBOO_SCHEME == "https" ]; then
+    xmlstarlet ed --pf --insert "//Connector[@port=8085]" -t attr -n secure -v true $SERVER_XML > $SERVER_XML.tmp
+    xmlstarlet ed --pf --insert "//Connector[@port=8085]" -t attr -n scheme -v https $SERVER_XML.tmp > $SERVER_XML
+    xmlstarlet ed --pf --insert "//Connector[@port=8085]" -t attr -n proxyPort -v 443 $SERVER_XML > $SERVER_XML.tmp
+    xmlstarlet ed --pf --insert "//Connector[@port=8085]" -t attr -n redirectPort -v 443 $SERVER_XML.tmp > $SERVER_XML
+  else
+    xmlstarlet ed --pf --insert "//Connector[@port=8085]" -t attr -n secure -v false $SERVER_XML > $SERVER_XML.tmp
+    xmlstarlet ed --pf --insert "//Connector[@port=8085]" -t attr -n scheme -v http $SERVER_XML.tmp > $SERVER_XML
+  fi
+  rm $SERVER_XML.tmp
   echo "-> Installation completed"
 fi
 
